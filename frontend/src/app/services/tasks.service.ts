@@ -6,7 +6,7 @@ import { Task, TaskFieldValues, TaskRecord } from '../api';
 
 const tasks: Task[] = [
   { title: 'Tummy time', description: 'Sit tummy down for at least 3 minutes.', id: '1', fields: [] },
-  { title: 'Feeding', description: 'Feed and burp.', id: '2', fields: [{ id: 'fluid-ounces', text: 'How much fl. oz.?', type: 'number' }] },
+  { title: 'Feeding', description: 'Feed and burp.', id: '2', fields: [{ name: 'fluid-ounces', text: 'How much fl. oz.?', type: 'number' }] },
   { title: 'Poop', description: 'Observed poop in pamper.', id: '3', fields: [] },
   { title: 'Old task', description: 'This task is no longer.', id: '4', fields: [], disabledAt: new Date('04/05/2020') },
 ];
@@ -31,7 +31,7 @@ export class TasksService {
     return of(tasks);
   }
 
-  getTaskRecords(): Observable<TaskRecord[]> {
+  getTaskRecords(taskId: string, date: Date): Observable<TaskRecord[]> {
     return of(tasksRecords);
   }
 

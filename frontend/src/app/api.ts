@@ -1,13 +1,16 @@
+// task field name => value
 export type TaskFieldValues = { [key: string]: string; };
 
+export type UUID4 = string;
+
 export type TaskField = {
-    id: string
+    name: string
     text: string
     type: 'number' | 'input' | 'textarea'
 }
 
 export type Task = {
-    id: string
+    id: UUID4
     title: string
     description: string
     fields: Array<TaskField>
@@ -15,9 +18,9 @@ export type Task = {
 }
 
 export type TaskRecord = {
-    id: string
-    taskId: string
+    id: UUID4
+    taskId: UUID4
+    completedAt: Date
     // key/id => value
     fieldValues: TaskFieldValues
-    completedAt: Date
 }

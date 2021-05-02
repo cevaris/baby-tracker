@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MaterialModule } from './material/material.module';
+import { TasksViewComponent } from './pages/tasks-view/tasks-view.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { TasksComponent } from './pages/tasks/tasks.component';
     AppComponent,
     ToolbarComponent,
     TasksComponent,
+    TasksViewComponent,
   ],
   imports: [
     AppRoutingModule,
