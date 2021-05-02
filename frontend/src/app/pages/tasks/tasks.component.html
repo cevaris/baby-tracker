@@ -1,1 +1,10 @@
 <p>tasks works!</p>
+
+<ul>
+    <div *ngFor="let task of activeTasks">
+        <li *ngIf="task.isActive">
+            <h1>{{task.title}}</h1>
+            <p>{{task.description}}</p>
+        </li>
+    </div>
+</ul>
