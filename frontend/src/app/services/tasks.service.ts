@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 import { Task, TaskFieldValues, TaskRecord } from '../api';
+
 
 const tasks: Task[] = [
   { title: 'Tummy time', description: 'Sit tummy down for at least 3 minutes.', id: '1', fields: [] },
@@ -10,13 +12,13 @@ const tasks: Task[] = [
 ];
 
 const tasksRecords: TaskRecord[] = [
-  { taskId: '1', fieldValues: {}, completedAt: new Date() },
-  { taskId: '2', fieldValues: { 'fluid-ounces': '1.0' }, completedAt: new Date() },
-  { taskId: '2', fieldValues: { 'fluid-ounces': '1.2' }, completedAt: new Date() },
-  { taskId: '1', fieldValues: {}, completedAt: new Date() },
-  { taskId: '3', fieldValues: {}, completedAt: new Date() },
-  { taskId: '4', fieldValues: {}, completedAt: new Date() },
-  { taskId: '4', fieldValues: {}, completedAt: new Date() },
+  { id: '1', taskId: '1', fieldValues: {}, completedAt: new Date() },
+  { id: '2', taskId: '2', fieldValues: { 'fluid-ounces': '1.0' }, completedAt: new Date() },
+  { id: '3', taskId: '2', fieldValues: { 'fluid-ounces': '1.2' }, completedAt: new Date() },
+  { id: '4', taskId: '1', fieldValues: {}, completedAt: new Date() },
+  { id: '5', taskId: '3', fieldValues: {}, completedAt: new Date() },
+  { id: '6', taskId: '4', fieldValues: {}, completedAt: new Date() },
+  { id: '7', taskId: '4', fieldValues: {}, completedAt: new Date() },
 ]
 
 @Injectable({
@@ -34,7 +36,7 @@ export class TasksService {
   }
 
   newTaskRecord(taskId: string, now: Date, fieldValues: TaskFieldValues): Observable<TaskRecord[]> {
-    tasksRecords.push({ taskId: taskId, fieldValues, completedAt: now });
+    tasksRecords.push({ id: uuidv4(), taskId: taskId, fieldValues, completedAt: now });
     return of(tasksRecords);
   }
 }

@@ -10,7 +10,10 @@
 
 <mat-list role="list">
     <mat-list-item role="listitem" *ngFor="let task of activeTasks">
-        <div mat-line><b>{{task.title}}</b></div>
-        <div mat-line>{{task.description}}</div>
+        <div [routerLink]="['/task-records/', task.id]"
+            [queryParams]="{date: today | date: 'dd-MM-yyyy'}">
+            <div mat-line><b>{{task.title}}</b></div>
+            <div mat-line>{{task.description}}</div>
+        </div>
     </mat-list-item>
 </mat-list>

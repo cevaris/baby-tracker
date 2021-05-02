@@ -20,7 +20,6 @@ export class TasksComponent implements OnInit {
   }
 
   onDateChange(date: Date) {
-    console.log('date', date);
     this.today = date;
     this.updateTasks();
   }
@@ -28,7 +27,7 @@ export class TasksComponent implements OnInit {
   private updateTasks() {
     this.taskService.getTasks()
       .pipe(
-        // only render active tasks
+        // if not disabled, only render active tasks
         map(tasks => tasks.filter(t => !t.disabledAt || t.disabledAt.getTime() >= this.today.getTime()))
       )
       .subscribe((tasks) => this.activeTasks = tasks);

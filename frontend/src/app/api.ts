@@ -15,6 +15,7 @@ export type Task = {
 }
 
 export type TaskRecord = {
+    id: string
     taskId: string
     // key/id => value
     fieldValues: TaskFieldValues
