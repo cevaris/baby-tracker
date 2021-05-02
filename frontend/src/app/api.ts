@@ -11,7 +11,7 @@ export type Task = {
     title: string
     description: string
     fields: Array<TaskField>
-    isActive: boolean
+    disabledAt?: Date
 }
 
 export type TaskRecord = {

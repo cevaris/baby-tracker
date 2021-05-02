@@ -1,14 +1,19 @@
 <h1>Tasks</h1>
 
-<input matInput [matDatepicker]="picker" [ngModel]="today" readonly>
-<mat-datepicker-toggle matSuffix [for]="picker">
-    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-</mat-datepicker-toggle>
-<mat-datepicker #picker disabled="false"></mat-datepicker>
+
+<div class="center">
+    <mat-form-field appearance="outline">
+        <input matInput #pickerInput [matDatepicker]="picker" [ngModel]="today"
+            (dateInput)="onDateChange($event.value)" (focus)="picker.open()"
+            readonly>
+    </mat-form-field>
+    <mat-datepicker #picker (closed)="pickerInput.blur()"></mat-datepicker>
+</div>
+
 
 <mat-list role="list">
     <mat-list-item role="listitem" *ngFor="let task of activeTasks">
         <div mat-line><b>{{task.title}}</b></div>
-        <div mat-line> {{task.description}} </div>
+        <div mat-line>{{task.description}}</div>
     </mat-list-item>
 </mat-list>

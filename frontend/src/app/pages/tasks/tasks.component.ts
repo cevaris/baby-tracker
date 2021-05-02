@@ -10,17 +10,27 @@ import { TasksService } from 'src/app/services/tasks.service';
 })
 export class TasksComponent implements OnInit {
   activeTasks: Task[];
-  today: Date = new Date();
+  today: Date;
 
   constructor(private taskService: TasksService) { }
 
   ngOnInit(): void {
+    this.today = new Date();
+    this.updateTasks();
+  }
 
+  onDateChange(date: Date) {
+    console.log('date', date);
+    this.today = date;
+    this.updateTasks();
+  }
+
+  private updateTasks() {
     this.taskService.getTasks()
       .pipe(
-        map(tasks => tasks.filter(t => t.isActive))
+        // only render active tasks
+        map(tasks => tasks.filter(t => !t.disabledAt || t.disabledAt.getTime() >= this.today.getTime()))
       )
       .subscribe((tasks) => this.activeTasks = tasks);
   }
-
 }
