@@ -1,10 +1,8 @@
-<p>tasks works!</p>
+<h1>Tasks</h1>
 
-<ul>
-    <div *ngFor="let task of activeTasks">
-        <li *ngIf="task.isActive">
-            <h1>{{task.title}}</h1>
-            <p>{{task.description}}</p>
-        </li>
-    </div>
-</ul>
+<mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let task of activeTasks">
+        <div mat-line><b>{{task.title}}</b></div>
+        <div mat-line> {{task.description}} </div>
+    </mat-list-item>
+</mat-list>
