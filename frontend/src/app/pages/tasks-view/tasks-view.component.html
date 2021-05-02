@@ -1,1 +1,11 @@
-<p>tasks-view works!</p>
+<div>
+    <h1>{{task.title}}</h1>
+</div>
+<div>{{task.description}}</div>
+
+<mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let taskRecord of taskRecords">
+        <div mat-line><b>{{taskRecord.completedAt | date}}</b></div>
+        <div mat-line>{{taskRecord.fieldValues}}</div>
+    </mat-list-item>
+</mat-list>

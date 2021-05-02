@@ -11,7 +11,7 @@
 <mat-list role="list">
     <mat-list-item role="listitem" *ngFor="let task of activeTasks"
         [routerLink]="['/tasks/', task.id]"
-        [queryParams]="{date: today | date: 'dd-MM-yyyy'}">
+        [queryParams]="{date: today | date: 'MM-dd-yyyy'}">
 
         <div mat-line><b>{{task.title}}</b></div>
         <div mat-line>{{task.description}}</div>

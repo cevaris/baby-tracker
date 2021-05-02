@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
-import { Task, TaskFieldValues, TaskRecord } from '../api';
+import { Task, TaskFieldValues, TaskRecord, UUID } from '../api';
 
 
 const tasks: Task[] = [
@@ -27,11 +27,19 @@ const tasksRecords: TaskRecord[] = [
 export class TasksService {
   constructor() { }
 
+  getTask(taskId: UUID): Observable<Task> {
+    const filtered = tasks.filter(t => t.id === taskId);
+    if (filtered.length > 0) {
+      return of(filtered[0]);
+    }
+    return null;
+  }
+
   getTasks(): Observable<Task[]> {
     return of(tasks);
   }
 
-  getTaskRecords(taskId: string, date: Date): Observable<TaskRecord[]> {
+  getTaskRecords(taskId: UUID, date: Date): Observable<TaskRecord[]> {
     return of(tasksRecords);
   }
 
