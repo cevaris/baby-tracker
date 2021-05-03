@@ -1,16 +1,24 @@
-<div>
-    <h1>{{task.title}}</h1>
-</div>
-<div>{{task.description}}</div>
+<div fxLayout="row" fxLayoutAlign="space-evenly center">
+    <div fxFlex="70" fxFlex.sm="80" fxFlex.xs="90">
+        <div>
+            <h1>{{task.title}}</h1>
+        </div>
+        <div>{{task.description}}</div>
 
-<mat-list role="list">
-    <mat-list-item role="listitem" *ngFor="let taskRecord of taskRecords">
-        <div mat-line><b>{{taskRecord.completedAt | date:'MM/dd h:mm a'}}</b>
-        </div>
-        <div mat-line
-            *ngFor="let recipient of taskRecord.fieldValues | keyvalue">
-            {{recipient.key}} = {{recipient.value}}
-        </div>
-        <mat-divider></mat-divider>
-    </mat-list-item>
-</mat-list>
+        <mat-list role="list">
+            <mat-list-item role="listitem"
+                *ngFor="let taskRecord of taskRecords">
+                <div mat-line>
+                    <b>
+                        {{taskRecord.completedAt | date:'MM/dd h:mm a'}}
+                    </b>
+                </div>
+                <div mat-line
+                    *ngFor="let recipient of taskRecord.fieldValues | keyvalue">
+                    {{recipient.key}} = {{recipient.value}}
+                </div>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>

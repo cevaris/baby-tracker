@@ -1,20 +1,24 @@
-<div class="center">
-    <mat-form-field appearance="outline">
-        <input matInput #pickerInput [matDatepicker]="picker" [ngModel]="today"
-            (dateInput)="onDateChange($event.value)" (focus)="picker.open()"
-            readonly>
-    </mat-form-field>
-    <mat-datepicker #picker (closed)="pickerInput.blur()"></mat-datepicker>
-</div>
+<div fxLayout="row" fxLayoutAlign="space-evenly center">
+    <div fxFlex="70" fxFlex.sm="80" fxFlex.xs="90">
+        <div class="center">
+            <mat-form-field appearance="outline">
+                <input matInput #pickerInput [matDatepicker]="picker"
+                    [ngModel]="today" (dateInput)="onDateChange($event.value)"
+                    (focus)="picker.open()" readonly>
+            </mat-form-field>
+            <mat-datepicker #picker (closed)="pickerInput.blur()">
+            </mat-datepicker>
+        </div>
 
 
-<mat-list role="list">
-    <mat-list-item role="listitem" *ngFor="let task of activeTasks"
-        [routerLink]="['/tasks/', task.id]"
-        [queryParams]="{date: today | date: 'MM-dd-yyyy'}">
+        <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let task of activeTasks"
+                [routerLink]="['/tasks/', task.id]"
+                [queryParams]="{date: today | date: 'MM-dd-yyyy'}">
 
-        <div mat-line><b>{{task.title}}</b></div>
-        <div mat-line>{{task.description}}</div>
+                <div mat-line><b>{{task.title}}</b></div>
+                <div mat-line>{{task.description}}</div>
 
-    </mat-list-item>
-</mat-list>
+            </mat-list-item>
+        </mat-list>
+    </div>
