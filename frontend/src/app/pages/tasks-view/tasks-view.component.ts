@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
-import { Task, TaskField, TaskRecord, UUID } from 'src/app/api';
+import { Task, TaskRecord, UUID } from 'src/app/api';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
@@ -15,13 +15,10 @@ export class TasksViewComponent implements OnInit {
 
   task: Task;
   taskRecords: TaskRecord[];
-  // name => 
-  taskFields: Map<string, [TaskField, string]>;
 
   constructor(private route: ActivatedRoute, private taskService: TasksService) {
     this.date = new Date(Date.parse(this.route.snapshot.queryParamMap.get('date')));
     this.taskId = this.route.snapshot.paramMap.get('id');
-    console.log(this.taskId, this.date);
   }
 
   ngOnInit(): void {
@@ -36,5 +33,4 @@ export class TasksViewComponent implements OnInit {
         this.task = task;
       });
   }
-
 }
