@@ -21,6 +21,6 @@ export type TaskRecord = {
     id: UUID
     taskId: UUID
     completedAt: Date
-    // key/id => value
+    // name => value
     fieldValues: TaskFieldValues
 }
