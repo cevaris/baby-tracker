@@ -15,7 +15,8 @@ export class TasksViewComponent implements OnInit {
 
   task: Task;
   taskRecords: TaskRecord[];
-  taskFields: Map<string, TaskField>;
+  // name => 
+  taskFields: Map<string, [TaskField, string]>;
 
   constructor(private route: ActivatedRoute, private taskService: TasksService) {
     this.date = new Date(Date.parse(this.route.snapshot.queryParamMap.get('date')));

@@ -40,7 +40,8 @@ export class TasksService {
   }
 
   getTaskRecords(taskId: UUID, date: Date): Observable<TaskRecord[]> {
-    return of(tasksRecords);
+    const filtered = tasksRecords.filter(tr => tr.taskId === taskId);
+    return of(filtered);
   }
 
   newTaskRecord(taskId: string, now: Date, fieldValues: TaskFieldValues): Observable<TaskRecord[]> {
