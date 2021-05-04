@@ -9,6 +9,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MaterialModule } from './material/material.module';
 import { TasksViewComponent } from './pages/tasks-view/tasks-view.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
+import { TaskRecordFormComponent } from './components/task-record-form/task-record-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { TasksComponent } from './pages/tasks/tasks.component';
     ToolbarComponent,
     TasksComponent,
     TasksViewComponent,
+    TaskRecordFormComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -24,6 +27,7 @@ import { TasksComponent } from './pages/tasks/tasks.component';
     FlexLayoutModule,
     FormsModule,
     MaterialModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

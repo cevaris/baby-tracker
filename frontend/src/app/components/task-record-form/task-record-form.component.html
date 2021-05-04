@@ -1,0 +1,26 @@
+<form [formGroup]="taskRecordForm" autocomplete="off" novalidate
+    fxLayout="column wrap" fxLayoutGap="10px">
+    <!-- <mat-form-field>
+        <input matInput type="text" placeholder="Link to shorten"
+            formControlName="link" id="link">
+        <mat-error id="error-link-required"
+            *ngIf="hasError('link', 'required')">Link is required.
+        </mat-error>
+        <mat-error id="error-link-invalid" *ngIf="hasError('link', 'invalid')">
+            {{linkForm.controls['link'].getError('invalid')}}
+        </mat-error>
+    </mat-form-field> -->
+
+    <mat-error id="error-form" *ngIf="formError">
+        {{formError}}
+    </mat-error>
+
+    <button id="form-submit" (click)="onSubmit()" mat-flat-button
+        color="primary" [disabled]="!taskRecordForm.valid || submitting">
+        Add New Entry
+    </button>
+
+    <!-- <div *ngIf="submitting" fxLayoutAlign="center">
+        <mat-spinner></mat-spinner>
+    </div> -->
+</form>

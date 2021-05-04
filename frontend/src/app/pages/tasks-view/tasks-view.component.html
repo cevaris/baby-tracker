@@ -5,6 +5,8 @@
         </div>
         <div>{{task.description}}</div>
 
+        <app-task-record-form [task]="task"></app-task-record-form>
+
         <mat-list role="list">
             <mat-list-item role="listitem"
                 *ngFor="let taskRecord of taskRecords">
@@ -20,7 +22,5 @@
                 <mat-divider></mat-divider>
             </mat-list-item>
         </mat-list>
-
-
     </div>
 </div>
