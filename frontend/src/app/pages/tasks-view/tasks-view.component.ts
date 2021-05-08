@@ -33,4 +33,11 @@ export class TasksViewComponent implements OnInit {
         this.task = task;
       });
   }
+
+  newTaskRecordCreated(taskRecord: TaskRecord) {
+    this.taskService.getTaskRecords(this.taskId, this.date)
+      .subscribe(taskRecords => this.taskRecords = taskRecords);
+
+    console.log('new task record', taskRecord);
+  }
 }

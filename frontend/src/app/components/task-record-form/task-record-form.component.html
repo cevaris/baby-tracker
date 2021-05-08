@@ -15,6 +15,15 @@
         {{formError}}
     </mat-error>
 
+    <mat-form-field mat-line *ngFor="let kv of task.fields | keyvalue">
+        <mat-label>{{kv.value.description}}</mat-label>
+        <input matInput [formControlName]="kv.value.name"
+            [type]="kv.value.description" [required]="kv.value.isRequired">
+        <mat-error *ngIf="taskRecordForm.get(kv.value.name).hasError('number')">
+            Not a number. Number is required.
+        </mat-error>
+    </mat-form-field>
+
     <button id="form-submit" (click)="onSubmit()" mat-flat-button
         color="primary" [disabled]="!taskRecordForm.valid || submitting">
         Add New Entry

@@ -5,7 +5,8 @@ export type UUID = string;
 
 export type TaskField = {
     name: string
-    text: string
+    description: string
+    isRequired: boolean
     type: 'number' | 'input' | 'textarea'
 }
 
