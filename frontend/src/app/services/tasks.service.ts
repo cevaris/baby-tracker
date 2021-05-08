@@ -14,8 +14,8 @@ const tasks: Task[] = [
 
 const tasksRecords: TaskRecord[] = [
   { id: '1', taskId: '1', fieldValues: {}, completedAt: new Date() },
-  { id: '2', taskId: '2', fieldValues: { 'fluid-ounces': '1.0' }, completedAt: new Date() },
-  { id: '3', taskId: '2', fieldValues: { 'fluid-ounces': '1.2' }, completedAt: new Date() },
+  { id: '2', taskId: '2', fieldValues: { 'ml': '70' }, completedAt: new Date() },
+  { id: '3', taskId: '2', fieldValues: { 'ml': '75' }, completedAt: new Date() },
   { id: '4', taskId: '1', fieldValues: {}, completedAt: new Date() },
   { id: '5', taskId: '3', fieldValues: {}, completedAt: new Date() },
   { id: '6', taskId: '4', fieldValues: {}, completedAt: new Date() },

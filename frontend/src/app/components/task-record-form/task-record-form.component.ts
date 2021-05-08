@@ -43,8 +43,11 @@ export class TaskRecordFormComponent implements OnInit {
 
   onSubmit(): void {
     this.submitting = true;
-    this.tasksService.newTaskRecord(this.task.id, new Date(), {})
+    this.tasksService.newTaskRecord(this.task.id, new Date(), this.taskRecordForm.value)
       .pipe(finalize(() => this.submitting = false))
-      .subscribe(taskRecord => this.taskRecordEmitter.emit(taskRecord));
+      .subscribe(taskRecord => {
+        this.taskRecordForm.reset();
+        this.taskRecordEmitter.emit(taskRecord);
+      });
   }
 }
