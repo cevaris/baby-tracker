@@ -1,3 +1,6 @@
+<div *ngIf="submitting">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
 <form [formGroup]="taskRecordForm" autocomplete="off" novalidate
     fxLayout="column wrap" fxLayoutGap="10px">
     <!-- <mat-form-field>
