@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin } from 'rxjs';
+import { forkJoin, iif, merge, Observable, Subscription } from 'rxjs';
+import { concatMap, filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { Task, TaskRecord, UUID } from 'src/app/api';
+import { TaskRecordDeleteDialogComponent } from 'src/app/components/task-record-delete-dialog/task-record-delete-dialog.component';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
@@ -16,7 +19,7 @@ export class TasksViewComponent implements OnInit {
   task: Task;
   taskRecords: TaskRecord[];
 
-  constructor(private route: ActivatedRoute, private taskService: TasksService) {
+  constructor(private route: ActivatedRoute, private taskService: TasksService, private dialog: MatDialog) {
     this.date = new Date(Date.parse(this.route.snapshot.queryParamMap.get('date')));
     this.taskId = this.route.snapshot.paramMap.get('id');
   }
@@ -35,9 +38,29 @@ export class TasksViewComponent implements OnInit {
   }
 
   newTaskRecordCreated(taskRecord: TaskRecord) {
-    this.taskService.getTaskRecords(this.taskId, this.date)
-      .subscribe(taskRecords => this.taskRecords = taskRecords);
-
+    this.reloadTasksRecords();
     console.log('new task record', taskRecord);
+  }
+
+  private reloadTasksRecords(): Subscription {
+    return this.taskService.getTaskRecords(this.taskId, this.date)
+      .subscribe(taskRecords => {
+        this.taskRecords = taskRecords;
+      });
+  }
+
+  deleteTaskRecord(taskRecordId: UUID) {
+    const dialogRef = this.dialog.open(TaskRecordDeleteDialogComponent);
+
+    dialogRef.afterClosed()
+      .pipe(
+        filter(result => result),
+        mergeMap(() => this.taskService.deleteTaskRecord(taskRecordId)),
+      )
+      .subscribe(
+        (result) => {
+          console.log(`Dialog result: ${result}`);
+          this.reloadTasksRecords();
+        });
   }
 }

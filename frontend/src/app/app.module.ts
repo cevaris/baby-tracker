@@ -11,6 +11,7 @@ import { TasksViewComponent } from './pages/tasks-view/tasks-view.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { TaskRecordFormComponent } from './components/task-record-form/task-record-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TaskRecordDeleteDialogComponent } from './components/task-record-delete-dialog/task-record-delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TasksComponent,
     TasksViewComponent,
     TaskRecordFormComponent,
+    TaskRecordDeleteDialogComponent,
   ],
   imports: [
     AppRoutingModule,

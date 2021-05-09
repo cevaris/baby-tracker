@@ -50,4 +50,12 @@ export class TasksService {
     tasksRecords.push(record);
     return of(record);
   }
+
+  deleteTaskRecord(id: UUID): Observable<void> {
+    const taskRecordIndex = tasksRecords.findIndex(tr => tr.id === id);
+    if (taskRecordIndex > 0) {
+      delete tasksRecords[taskRecordIndex];
+    }
+    return of(null);
+  }
 }
