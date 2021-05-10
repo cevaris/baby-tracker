@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin, iif, merge, Observable, Subscription } from 'rxjs';
-import { concatMap, filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { forkJoin, Subscription } from 'rxjs';
+import { filter, mergeMap } from 'rxjs/operators';
 import { Task, TaskRecord, UUID } from 'src/app/api';
 import { TaskRecordDeleteDialogComponent } from 'src/app/components/task-record-delete-dialog/task-record-delete-dialog.component';
 import { TasksService } from 'src/app/services/tasks.service';
@@ -38,8 +38,8 @@ export class TasksViewComponent implements OnInit {
   }
 
   newTaskRecordCreated(taskRecord: TaskRecord) {
-    this.reloadTasksRecords();
     console.log('new task record', taskRecord);
+    this.reloadTasksRecords();
   }
 
   private reloadTasksRecords(): Subscription {
@@ -57,10 +57,6 @@ export class TasksViewComponent implements OnInit {
         filter(result => result),
         mergeMap(() => this.taskService.deleteTaskRecord(taskRecordId)),
       )
-      .subscribe(
-        (result) => {
-          console.log(`Dialog result: ${result}`);
-          this.reloadTasksRecords();
-        });
+      .subscribe(() => this.reloadTasksRecords());
   }
 }

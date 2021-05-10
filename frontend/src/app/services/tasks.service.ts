@@ -13,13 +13,15 @@ const tasks: Task[] = [
 ];
 
 const tasksRecords: TaskRecord[] = [
-  { id: '1', taskId: '1', fieldValues: {}, completedAt: new Date() },
-  { id: '2', taskId: '2', fieldValues: { 'ml': '70' }, completedAt: new Date() },
-  { id: '3', taskId: '2', fieldValues: { 'ml': '75' }, completedAt: new Date() },
-  { id: '4', taskId: '1', fieldValues: {}, completedAt: new Date() },
-  { id: '5', taskId: '3', fieldValues: {}, completedAt: new Date() },
-  { id: '6', taskId: '4', fieldValues: {}, completedAt: new Date() },
-  { id: '7', taskId: '4', fieldValues: {}, completedAt: new Date() },
+  { id: '10', taskId: '1', fieldValues: {}, completedAt: new Date() },
+  { id: '20', taskId: '2', fieldValues: { 'ml': '70' }, completedAt: new Date() },
+  { id: '30', taskId: '2', fieldValues: { 'ml': '75' }, completedAt: new Date('2021-05-05') },
+  { id: '40', taskId: '2', fieldValues: { 'ml': '75' }, completedAt: new Date('2021-05-05') },
+  { id: '40', taskId: '2', fieldValues: { 'ml': '75' }, completedAt: new Date('2021-05-06') },
+  { id: '50', taskId: '1', fieldValues: {}, completedAt: new Date() },
+  { id: '60', taskId: '3', fieldValues: {}, completedAt: new Date() },
+  { id: '70', taskId: '4', fieldValues: {}, completedAt: new Date() },
+  { id: '80', taskId: '4', fieldValues: {}, completedAt: new Date() },
 ]
 
 @Injectable({
@@ -41,7 +43,14 @@ export class TasksService {
   }
 
   getTaskRecords(taskId: UUID, date: Date): Observable<TaskRecord[]> {
-    const filtered = tasksRecords.filter(tr => tr.taskId === taskId);
+    function sameDay(left: Date, right: Date): boolean {
+      return left.getFullYear() === right.getFullYear() &&
+        left.getMonth() === right.getMonth() &&
+        left.getDate() === right.getDate();
+    }
+
+    const filtered = tasksRecords
+      .filter(tr => tr.taskId === taskId && sameDay(tr.completedAt, date));
     return of(filtered);
   }
 
@@ -52,9 +61,10 @@ export class TasksService {
   }
 
   deleteTaskRecord(id: UUID): Observable<void> {
+    console.log(tasksRecords);
     const taskRecordIndex = tasksRecords.findIndex(tr => tr.id === id);
     if (taskRecordIndex > 0) {
-      delete tasksRecords[taskRecordIndex];
+      tasksRecords.splice(taskRecordIndex, 1);
     }
     return of(null);
   }
