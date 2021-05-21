@@ -22,7 +22,11 @@ const tasksRecords: TaskRecord[] = [
   { id: '60', taskId: '3', fieldValues: {}, completedAt: new Date() },
   { id: '70', taskId: '4', fieldValues: {}, completedAt: new Date() },
   { id: '80', taskId: '4', fieldValues: {}, completedAt: new Date() },
-]
+];
+
+function utcDateStr(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
 
 @Injectable({
   providedIn: 'root'

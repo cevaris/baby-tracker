@@ -22,6 +22,8 @@ export class TasksViewComponent implements OnInit {
   constructor(private route: ActivatedRoute, private taskService: TasksService, private dialog: MatDialog) {
     this.date = new Date(Date.parse(this.route.snapshot.queryParamMap.get('date')));
     this.taskId = this.route.snapshot.paramMap.get('id');
+
+    console.log('TasksViewComponent', this.date);
   }
 
   ngOnInit(): void {
