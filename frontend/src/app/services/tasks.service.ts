@@ -6,22 +6,22 @@ import { Task, TaskFieldValues, TaskRecord, UUID } from '../api';
 
 const tasks: Task[] = [
   { title: 'Tummy time', description: 'Sit tummy down for at least 3 minutes.', id: '1', fields: [] },
-  { title: 'Feeding', description: 'Feed and burp.', id: '2', fields: [{ name: 'ml', description: 'How much milliliters?', type: 'number', isRequired: true }] },
+  { title: 'Feeding', description: 'Feed and burp.', id: '2', fields: [{ name: 'ml', description: 'How much milliliters?', type: 'number', is_required: true }] },
   { title: 'Poop', description: 'Observed poop in pamper.', id: '3', fields: [] },
-  { title: 'Old task', description: 'This task is no longer.', id: '4', fields: [], disabledAt: new Date('04/05/2020') },
-  { title: 'Non Required field', description: 'This field task value is not required.', id: '5', fields: [{ name: 'task_field1', description: 'optional field?', type: 'input', isRequired: false }] },
+  { title: 'Old task', description: 'This task is no longer.', id: '4', fields: [], disabled_at: new Date('04/05/2020') },
+  { title: 'Non Required field', description: 'This field task value is not required.', id: '5', fields: [{ name: 'task_field1', description: 'optional field?', type: 'input', is_required: false }] },
 ];
 
 const tasksRecords: TaskRecord[] = [
-  { id: '10', taskId: '1', fieldValues: {}, completedAt: new Date() },
-  { id: '20', taskId: '2', fieldValues: { 'ml': '70' }, completedAt: new Date() },
-  { id: '30', taskId: '2', fieldValues: { 'ml': '75' }, completedAt: new Date('2021-05-05') },
-  { id: '40', taskId: '2', fieldValues: { 'ml': '75' }, completedAt: new Date('2021-05-05') },
-  { id: '40', taskId: '2', fieldValues: { 'ml': '75' }, completedAt: new Date('2021-05-06') },
-  { id: '50', taskId: '1', fieldValues: {}, completedAt: new Date() },
-  { id: '60', taskId: '3', fieldValues: {}, completedAt: new Date() },
-  { id: '70', taskId: '4', fieldValues: {}, completedAt: new Date() },
-  { id: '80', taskId: '4', fieldValues: {}, completedAt: new Date() },
+  { id: '10', task_id: '1', field_values: {}, completed_at: new Date() },
+  { id: '20', task_id: '2', field_values: { 'ml': '70' }, completed_at: new Date() },
+  { id: '30', task_id: '2', field_values: { 'ml': '75' }, completed_at: new Date('2021-05-05') },
+  { id: '40', task_id: '2', field_values: { 'ml': '75' }, completed_at: new Date('2021-05-05') },
+  { id: '40', task_id: '2', field_values: { 'ml': '75' }, completed_at: new Date('2021-05-06') },
+  { id: '50', task_id: '1', field_values: {}, completed_at: new Date() },
+  { id: '60', task_id: '3', field_values: {}, completed_at: new Date() },
+  { id: '70', task_id: '4', field_values: {}, completed_at: new Date() },
+  { id: '80', task_id: '4', field_values: {}, completed_at: new Date() },
 ];
 
 function utcDateStr(date: Date): string {
@@ -54,12 +54,12 @@ export class TasksService {
     }
 
     const filtered = tasksRecords
-      .filter(tr => tr.taskId === taskId && sameDay(tr.completedAt, date));
+      .filter(tr => tr.task_id === taskId && sameDay(tr.completed_at, date));
     return of(filtered);
   }
 
-  newTaskRecord(taskId: string, now: Date, fieldValues: TaskFieldValues): Observable<TaskRecord> {
-    const record = { id: uuidv4(), taskId: taskId, fieldValues, completedAt: now };
+  newTaskRecord(task_id: string, now: Date, fieldValues: TaskFieldValues): Observable<TaskRecord> {
+    const record = { id: uuidv4(), task_id: task_id, field_values: fieldValues, completed_at: now };
     tasksRecords.push(record);
     return of(record);
   }

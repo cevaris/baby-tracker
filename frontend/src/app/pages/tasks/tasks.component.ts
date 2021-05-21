@@ -28,7 +28,7 @@ export class TasksComponent implements OnInit {
     this.taskService.getTasks()
       .pipe(
         // if not disabled, only render active tasks
-        map(tasks => tasks.filter(t => !t.disabledAt || t.disabledAt.getTime() >= this.today.getTime()))
+        map(tasks => tasks.filter(t => !t.disabled_at || t.disabled_at.getTime() >= this.today.getTime()))
       )
       .subscribe((tasks) => this.activeTasks = tasks);
   }

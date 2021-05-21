@@ -6,8 +6,8 @@ export type UUID = string;
 export type TaskField = {
     name: string
     description: string
-    isRequired: boolean
-    type: 'number' | 'input' | 'textarea'
+    is_required: boolean
+    type: 'number' | 'input' | 'textarea' | 'checkbox'
 }
 
 export type Task = {
@@ -15,13 +15,13 @@ export type Task = {
     title: string
     description: string
     fields: Array<TaskField>
-    disabledAt?: Date
+    disabled_at?: Date
 }
 
 export type TaskRecord = {
     id: UUID
-    taskId: UUID
-    completedAt: Date
+    task_id: UUID
+    completed_at: Date
     // name => value
-    fieldValues: TaskFieldValues
+    field_values: TaskFieldValues
 }

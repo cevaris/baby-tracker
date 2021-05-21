@@ -29,7 +29,7 @@ export class TaskRecordFormComponent implements OnInit {
     const controls = {};
     this.task.fields.map(taskField => {
       const validators = [];
-      if (taskField.isRequired) {
+      if (taskField.is_required) {
         validators.push(Validators.required);
       }
       if (taskField.type === 'number') {
