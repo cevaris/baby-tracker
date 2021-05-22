@@ -1,3 +1,65 @@
+scalar Date
+
 type Query {
   hello: String
+  getTasks: [Task]
+}
+
+# task field name => value
+# export type TaskFieldValues = { [key: string]: string; };
+type KeyValue {
+  key: String
+  value: String
+}
+
+# export type UUID = string;
+
+# export type TaskField = {
+#     name: string
+#     description: string
+#     is_required: boolean
+#     type: 'number' | 'input' | 'textarea' | 'checkbox'
+# }
+
+enum TaskFieldType {
+  number
+  input
+  textarea
+  checkbox
+}
+type TaskField {
+  name: String
+  description: String
+  is_required: Boolean
+  field_type: TaskFieldType
+}
+
+# export type Task = {
+#     id: UUID
+#     title: string
+#     description: string
+#     fields: Array<TaskField>
+#     disabled_at?: Date
+# }
+type Task {
+  id: String
+  title: String
+  description: String
+  fields: [TaskField]
+  disabled_at: Date
+}
+
+# export type TaskRecord = {
+#     id: UUID
+#     task_id: UUID
+#     completed_at: Date
+#     # name => value
+#     field_values: TaskFieldValues
+# }
+type TaskRecord {
+  id: String
+  task_id: Task
+  completed_at: Date
+  # key: TaskField.name, value: string typed value
+  field_values: [KeyValue]
 }

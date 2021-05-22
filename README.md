@@ -7,4 +7,5 @@ GraphQL
 - [Nested queries](https://www.wisdomgeek.com/development/web-development/graphql/resolving-nested-queries-graphql/)
 - [Express GraphQL API](https://graphql.org/graphql-js/running-an-express-graphql-server/)
 - [Apollo - Angular/GraphQL](https://apollo-angular.com/docs/data/services/#basic-example-2)
-- [Backend/Typescript Apollo Server](https://mbbaig.blog/apollo-server-typescript/)
+- [Configure Backend/Typescript Apollo Server](https://mbbaig.blog/apollo-server-typescript/)
+- [Apollo Server](https://www.apollographql.com/docs/apollo-server/integrations/middleware/)
