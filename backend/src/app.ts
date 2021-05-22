@@ -1,5 +1,6 @@
 import cors from 'cors';
 import express from 'express';
+import { graphQL } from './config/graphql';
 
 export const app: express.Express = express();
 
@@ -22,5 +23,9 @@ app.use(cors(corsOptions));
 // ignore favicon requests
 app.get('/favicon.ico', (req, res) => res.sendStatus(204));
 
-// import routes
+// import custom routes
 app.use(require('./routes'));
+
+// wire in graphQL server
+graphQL.applyMiddleware({ app, path: "/graphql" });
+// export const server = createServer(app);
