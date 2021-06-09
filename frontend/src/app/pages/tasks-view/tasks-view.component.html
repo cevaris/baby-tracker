@@ -14,7 +14,7 @@
                 *ngFor="let taskRecord of taskRecords">
                 <div mat-line>
                     <b>
-                        {{taskRecord.completedAt | date:'MM/dd h:mm a'}}
+                        {{taskRecord.completed_at | date:'MM/dd h:mm a'}}
                     </b>
                     <button mat-icon-button
                         (click)="deleteTaskRecord(taskRecord.id)">
@@ -22,7 +22,7 @@
                     </button>
                 </div>
                 <div mat-line
-                    *ngFor="let recipient of taskRecord.fieldValues | keyvalue">
+                    *ngFor="let recipient of taskRecord.field_values | keyvalue">
                     {{recipient.key}}: {{recipient.value}}
                     <br />
                 </div>

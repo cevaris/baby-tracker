@@ -8,11 +8,11 @@
         {{formError}}
     </mat-error>
 
-    <mat-form-field mat-line *ngFor="let kv of task.fields | keyvalue">
-        <mat-label>{{kv.value.description}}</mat-label>
-        <input matInput [formControlName]="kv.value.name"
-            [type]="kv.value.description" [required]="kv.value.isRequired">
-        <mat-error *ngIf="taskRecordForm.get(kv.value.name).hasError('number')">
+    <mat-form-field mat-line *ngFor="let taskField of task.fields">
+        <mat-label>{{taskField.description}}</mat-label>
+        <input matInput [formControlName]="taskField.name"
+            [type]="taskField.description" [required]="taskField.is_required">
+        <mat-error *ngIf="taskRecordForm.get(taskField.name).hasError('number')">
             Not a number. Number is required.
         </mat-error>
     </mat-form-field>
