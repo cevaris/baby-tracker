@@ -1,8 +1,9 @@
-openapi: "3.0.0"
+openapi: "3.1.0"
 info:
-  version: 1.0.0
+  version: 1.0.1
   title: Swagger Petstore
   license:
+    identifier: ''
     name: MIT
 servers:
   - url: http://petstore.swagger.io/v1
@@ -86,11 +87,14 @@ components:
       required:
         - id
         - name
+        - birthday
       properties:
         id:
           type: integer
           format: int64
         name:
+          type: string
+        birthday:
           type: string
         tag:
           type: string

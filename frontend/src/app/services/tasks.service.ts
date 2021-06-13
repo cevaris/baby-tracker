@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+import { ApiPet } from '../../../../common/api';
 import { Task, TaskFieldValues, TaskRecord, UUID } from '../api';
-
 
 const tasks: Task[] = [
   { title: 'Tummy time', description: 'Sit tummy down for at least 3 minutes.', id: '1', fields: [] },
@@ -23,6 +23,10 @@ const tasksRecords: TaskRecord[] = [
   { id: '70', task_id: '4', field_values: {}, completed_at: new Date() },
   { id: '80', task_id: '4', field_values: {}, completed_at: new Date() },
 ];
+
+const pets: ApiPet = {
+  id: 110, name: 'Alfred', birthday: new Date().toISOString()
+}
 
 function utcDateStr(date: Date): string {
   return date.toISOString().slice(0, 10);

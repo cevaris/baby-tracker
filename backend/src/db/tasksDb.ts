@@ -1,4 +1,4 @@
-import { ApiPet } from '../generated/api';
+import { ApiPet } from '../../../common/api';
 import * as graphql from '../generated/graphql';
 
 export class TasksDb {
@@ -9,7 +9,7 @@ export class TasksDb {
 
     async get() {
         const pet: ApiPet = {
-            id: 1, name: 'billy'
+            id: 1, name: 'billy', birthday: new Date().toISOString()
         };
 
         const task: graphql.Task = { title: 'blah' };
