@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run start",
-    "generate": "graphql-codegen --config codegen.yml",
+    "generate": "./node_modules/.bin/openapi-typescript ../common/openapi.yaml --output src/generated/openapi.ts",
     "start": "nodemon --watch .. --watch ../common ./src/index.ts -e ts,yaml,json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
