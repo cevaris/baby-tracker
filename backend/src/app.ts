@@ -3,7 +3,6 @@ import express from 'express';
 import path from 'path';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
-import { graphQL } from './config/graphql';
 
 export const app: express.Express = express();
 
@@ -23,12 +22,13 @@ const corsOptions: cors.CorsOptions = {
 app.use(cors(corsOptions));
 
 // openapi docs
-const filepath = path.resolve(__dirname, '../../common/openapi.yaml')
+const filepath = path.resolve(__dirname, '../openapi.yaml');
 const data = YAML.load(filepath);
 if (data && typeof data === 'object') {
     app.use('/openapi', swaggerUi.serve, swaggerUi.setup(data));
+    console.log('loaded /openapi docs')
 } else {
-    console.error('failed to load swagger-ui');
+    throw new Error(`failed to load swagger-ui: filepath=${filepath} data=${data}`);
 }
 
 // ignore favicon requests
@@ -36,7 +36,3 @@ app.get('/favicon.ico', (req, res) => res.sendStatus(204));
 
 // import custom routes
 app.use(require('./routes'));
-
-// wire in graphQL server
-graphQL.applyMiddleware({ app, path: "/graphql" });
-// export const server = createServer(app);
