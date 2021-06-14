@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { finalize, switchMap, tap } from 'rxjs/operators';
-import { Task, TaskRecord } from 'src/app/api';
+import { finalize } from 'rxjs/operators';
 import { TasksService } from 'src/app/services/tasks.service';
+import { ApiTask, ApiTaskRecord } from 'src/app/types/api';
 import { numberValidator } from 'src/app/validators/number.validator';
 
 @Component({
@@ -12,8 +12,8 @@ import { numberValidator } from 'src/app/validators/number.validator';
 })
 export class TaskRecordFormComponent implements OnInit {
 
-  @Input() task: Task;
-  @Output() taskRecordEmitter: EventEmitter<TaskRecord> = new EventEmitter();
+  @Input() task: ApiTask;
+  @Output() taskRecordEmitter: EventEmitter<ApiTaskRecord> = new EventEmitter();
 
   taskRecordForm: FormGroup;
 

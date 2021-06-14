@@ -15,6 +15,30 @@ export interface paths {
 
 export interface components {
   schemas: {
+    Task: {
+      id: string;
+      title: string;
+      description: string;
+      disabled_at?: string;
+      fields: components["schemas"]["TaskField"][];
+    };
+    TaskFieldValue: {
+      name?: string;
+      value?: string;
+    };
+    TaskRecord: {
+      id: string;
+      task_id: string;
+      completed_at?: string;
+      field_values?: components["schemas"]["TaskFieldValue"][];
+    };
+    TaskField: {
+      id?: string;
+      name?: string;
+      description?: string;
+      is_required?: boolean;
+      type?: "checkbox" | "input" | "number" | "textarea";
+    };
     Pet: {
       id: number;
       name: string;

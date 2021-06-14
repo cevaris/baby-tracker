@@ -3,9 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin, Subscription } from 'rxjs';
 import { filter, mergeMap } from 'rxjs/operators';
-import { Task, TaskRecord, UUID } from 'src/app/api';
 import { TaskRecordDeleteDialogComponent } from 'src/app/components/task-record-delete-dialog/task-record-delete-dialog.component';
 import { TasksService } from 'src/app/services/tasks.service';
+import { ApiTask, ApiTaskRecord, UUID } from 'src/app/types/api';
 
 @Component({
   selector: 'app-tasks-view',
@@ -16,8 +16,8 @@ export class TasksViewComponent implements OnInit {
   date: Date;
   taskId: UUID;
 
-  task: Task;
-  taskRecords: TaskRecord[];
+  task: ApiTask;
+  taskRecords: ApiTaskRecord[];
 
   constructor(private route: ActivatedRoute, private taskService: TasksService, private dialog: MatDialog) {
     this.date = new Date(Date.parse(this.route.snapshot.queryParamMap.get('date')));
@@ -33,13 +33,13 @@ export class TasksViewComponent implements OnInit {
     ];
 
     forkJoin(observables)
-      .subscribe(([taskRecords, task]: [TaskRecord[], Task]) => {
+      .subscribe(([taskRecords, task]: [ApiTaskRecord[], ApiTask]) => {
         this.taskRecords = taskRecords;
         this.task = task;
       });
   }
 
-  newTaskRecordCreated(taskRecord: TaskRecord) {
+  newTaskRecordCreated(taskRecord: ApiTaskRecord) {
     console.log('new task record', taskRecord);
     this.reloadTasksRecords();
   }

@@ -3,7 +3,7 @@ info:
   version: 1.0.1
   title: Swagger Petstore
   license:
-    identifier: ''
+    identifier: ""
     name: MIT
 servers:
   - url: http://petstore.swagger.io/v1
@@ -82,6 +82,78 @@ paths:
                 $ref: "#/components/schemas/Error"
 components:
   schemas:
+    Task:
+      type: object
+      required:
+        - id
+        - title
+        - description
+        - fields
+      properties:
+        id:
+          type: string
+          format: UUID
+        title:
+          type: string
+        description:
+          type: string
+        disabled_at:
+          type: string
+          format: date-time
+        fields:
+          type: array
+          items:
+            $ref: "#/components/schemas/TaskField"
+    TaskFieldValue:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    TaskRecord:
+      type: object
+      required:
+        - id
+        - task_id
+        - user_id
+      properties:
+        id:
+          type: string
+          format: UUID
+        task_id:
+          type: string
+          format: UUID
+        # user_id:
+        #   type: string
+        #   format: UUID
+        completed_at:
+          type: string
+          format: date-time
+        field_values:
+          type: array
+          items:
+            $ref: "#/components/schemas/TaskFieldValue"
+
+    TaskField:
+      type: object
+      properties:
+        id:
+          type: string
+          format: UUID
+        name:
+          type: string
+        description:
+          type: string
+        is_required:
+          type: boolean
+        type:
+          type: string
+          enum:
+            - checkbox
+            - input
+            - number
+            - textarea
     Pet:
       type: object
       required:

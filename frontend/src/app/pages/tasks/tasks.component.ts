@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Task } from 'src/app/api';
 import { TasksService } from 'src/app/services/tasks.service';
+import { ApiTask } from 'src/app/types/api';
 
 @Component({
   selector: 'app-tasks',
@@ -9,7 +9,7 @@ import { TasksService } from 'src/app/services/tasks.service';
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent implements OnInit {
-  activeTasks: Task[];
+  activeTasks: ApiTask[];
   today: Date;
 
   constructor(private taskService: TasksService) { }
@@ -28,7 +28,7 @@ export class TasksComponent implements OnInit {
     this.taskService.getTasks()
       .pipe(
         // if not disabled, only render active tasks
-        map(tasks => tasks.filter(t => !t.disabled_at || t.disabled_at.getTime() >= this.today.getTime()))
+        map(tasks => tasks.filter(t => !t.disabled_at || new Date(t.disabled_at).getTime() >= this.today.getTime()))
       )
       .subscribe((tasks) => this.activeTasks = tasks);
   }
