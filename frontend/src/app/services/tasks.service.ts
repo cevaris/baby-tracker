@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
-import { ApiPet } from '../../../../common/api';
 import { Task, TaskFieldValues, TaskRecord, UUID } from '../api';
+import { ApiPet } from '../types/api';
 
 const tasks: Task[] = [
   { title: 'Tummy time', description: 'Sit tummy down for at least 3 minutes.', id: '1', fields: [] },

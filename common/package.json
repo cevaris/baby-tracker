@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "generate": "./node_modules/.bin/openapi-typescript ./openapi.yaml --output ./openapi.ts",
-    "dev": "./node_modules/.bin/nodemon --exec 'npm run generate' ./openapi.yaml -e yaml"
+    "dev": "./node_modules/.bin/nodemon --exec 'npm run generate' ./openapi.yaml -e yaml,json"
   },
   "author": "",
   "license": "ISC",

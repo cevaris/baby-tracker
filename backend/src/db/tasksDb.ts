@@ -1,5 +1,5 @@
-import { ApiError, ApiPet } from '../../../common/api';
 import * as graphql from '../generated/graphql';
+import { ApiPet } from '../types/api';
 
 export class TasksDb {
     private db: FirebaseFirestore.Firestore;
