@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc -p . && cp ./src/types/openapi.yaml ./dist/types/openapi.yaml",
     "deploy": "echo 'y' | gcloud app deploy",
     "dev": "npm run start",
     "gcp-build": "npm run build",

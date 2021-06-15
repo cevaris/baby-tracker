@@ -22,7 +22,7 @@ const corsOptions: cors.CorsOptions = {
 app.use(cors(corsOptions));
 
 // openapi docs
-const filepath = path.resolve(__dirname, '../openapi.yaml');
+const filepath = path.resolve(__dirname, './types/openapi.yaml');
 const data = YAML.load(filepath);
 if (data && typeof data === 'object') {
     app.use('/openapi', swaggerUi.serve, swaggerUi.setup(data));
