@@ -1,8 +1,6 @@
 import cors from 'cors';
 import express from 'express';
-import path from 'path';
-import swaggerUi from 'swagger-ui-express';
-import YAML from 'yamljs';
+import { openapi } from './routes/docs';
 
 export const app: express.Express = express();
 
@@ -22,17 +20,12 @@ const corsOptions: cors.CorsOptions = {
 app.use(cors(corsOptions));
 
 // openapi docs
-const filepath = path.resolve(__dirname, './types/openapi.yaml');
-const data = YAML.load(filepath);
-if (data && typeof data === 'object') {
-    app.use('/openapi', swaggerUi.serve, swaggerUi.setup(data));
-    console.log('loaded /openapi docs')
-} else {
-    throw new Error(`failed to load swagger-ui: filepath=${filepath} data=${data}`);
-}
+openapi(app);
 
 // ignore favicon requests
 app.get('/favicon.ico', (req, res) => res.sendStatus(204));
 
 // import custom routes
 app.use(require('./routes'));
+app.use(require('./routes/tasks'));
+app.use(require('./routes/tasksRecords'));

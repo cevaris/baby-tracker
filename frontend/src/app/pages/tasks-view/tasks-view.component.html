@@ -22,8 +22,8 @@
                     </button>
                 </div>
                 <div mat-line
-                    *ngFor="let recipient of taskRecord.field_values | keyvalue">
-                    {{recipient.key}}: {{recipient.value}}
+                    *ngFor="let recipient of taskRecord.field_values">
+                    {{recipient.name}}: {{recipient.value}}
                     <br />
                 </div>
                 <mat-divider></mat-divider>

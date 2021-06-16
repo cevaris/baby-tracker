@@ -4,8 +4,8 @@
  */
 
 export interface paths {
-  "/pets": {
-    get: operations["listPets"];
+  "/tasks": {
+    get: operations["listTasks"];
     post: operations["createPets"];
   };
   "/pets/{petId}": {
@@ -29,6 +29,7 @@ export interface components {
     TaskRecord: {
       id: string;
       task_id: string;
+      user_id: string;
       completed_at?: string;
       field_values?: components["schemas"]["TaskFieldValue"][];
     };
@@ -38,6 +39,10 @@ export interface components {
       description?: string;
       is_required?: boolean;
       type?: "checkbox" | "input" | "number" | "textarea";
+    };
+    User: {
+      id?: string;
+      name?: string;
     };
     Pet: {
       id: number;
@@ -54,11 +59,11 @@ export interface components {
 }
 
 export interface operations {
-  listPets: {
+  listTasks: {
     parameters: {
       query: {
         /** How many items to return at one time (max 100) */
-        limit?: number;
+        date: string;
       };
     };
     responses: {
