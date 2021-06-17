@@ -22,17 +22,22 @@ export class TasksViewComponent implements OnInit {
   taskRecords: ApiTaskRecord[];
 
   constructor(private route: ActivatedRoute, private taskService: TasksService, private dialog: MatDialog) {
-    // construct local time UTC date based off YYYY-MM-DD string
-    const now = moment(new Date());
-    const dt = moment(this.route.snapshot.queryParamMap.get('date'), 'YYYY-MM-DD');
-    dt.second(now.seconds());
-    dt.minute(now.minutes());
-    dt.hour(now.hours());
-    this.date = dt.toDate();
 
-    this.taskId = this.route.snapshot.paramMap.get('id');
+    this.route.queryParamMap
+      .subscribe(queryParamMap => {
+        console.log('trying to load TaskView')
+        // construct local time UTC date based off YYYY-MM-DD string
+        const now = moment(new Date());
+        const dt = moment(queryParamMap.get('date'), 'YYYY-MM-DD');
+        dt.second(now.seconds());
+        dt.minute(now.minutes());
+        dt.hour(now.hours());
+        this.date = dt.toDate();
 
-    console.log('TasksViewComponent', dt, this.date.toISOString());
+        this.taskId = this.route.snapshot.paramMap.get('id');
+        console.log('TasksViewComponent', dt, this.date.toISOString());
+      })
+
   }
 
   ngOnInit(): void {
