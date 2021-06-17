@@ -1,10 +1,10 @@
-<div fxLayout="row" fxLayoutAlign="space-evenly center">
+<div fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="task">
     <div fxFlex="70" fxFlex.sm="80" fxFlex.xs="90">
+
         <div>
             <h1>{{task.title}}</h1>
         </div>
         <div>{{task.description}}</div>
-
         <app-task-record-form [task]="task"
             (taskRecordEmitter)="newTaskRecordCreated($event)">
         </app-task-record-form>
@@ -21,8 +21,7 @@
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>
-                <div mat-line
-                    *ngFor="let recipient of taskRecord.field_values">
+                <div mat-line *ngFor="let recipient of taskRecord.field_values">
                     {{recipient.name}}: {{recipient.value}}
                     <br />
                 </div>

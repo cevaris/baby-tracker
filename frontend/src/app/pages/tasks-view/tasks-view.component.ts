@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 import { forkJoin, Subscription } from 'rxjs';
 import { filter, mergeMap } from 'rxjs/operators';
 import { TaskRecordDeleteDialogComponent } from 'src/app/components/task-record-delete-dialog/task-record-delete-dialog.component';
@@ -14,16 +15,24 @@ import { ApiTask, ApiTaskRecord, UUID } from 'src/app/types/api';
 })
 export class TasksViewComponent implements OnInit {
   date: Date;
+  dateStr: String;
   taskId: UUID;
 
   task: ApiTask;
   taskRecords: ApiTaskRecord[];
 
   constructor(private route: ActivatedRoute, private taskService: TasksService, private dialog: MatDialog) {
-    this.date = new Date(Date.parse(this.route.snapshot.queryParamMap.get('date')));
+    // construct local time UTC date based off YYYY-MM-DD string
+    const now = moment(new Date());
+    const dt = moment(this.route.snapshot.queryParamMap.get('date'), 'YYYY-MM-DD');
+    dt.second(now.seconds());
+    dt.minute(now.minutes());
+    dt.hour(now.hours());
+    this.date = dt.toDate();
+
     this.taskId = this.route.snapshot.paramMap.get('id');
 
-    console.log('TasksViewComponent', this.date);
+    console.log('TasksViewComponent', dt, this.date.toISOString());
   }
 
   ngOnInit(): void {
@@ -34,8 +43,12 @@ export class TasksViewComponent implements OnInit {
 
     forkJoin(observables)
       .subscribe(([taskRecords, task]: [ApiTaskRecord[], ApiTask]) => {
+        console.log('task', task)
+        console.log('taskRecords', taskRecords)
         this.taskRecords = taskRecords;
         this.task = task;
+      }, error => {
+        console.log('failed fetching task/taskrecords', error);
       });
   }
 

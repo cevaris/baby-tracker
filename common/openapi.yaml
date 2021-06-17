@@ -116,6 +116,7 @@ components:
         - id
         - task_id
         - user_id
+        - completed_at
       properties:
         id:
           type: string

@@ -3,8 +3,8 @@ export type UUID = string;
 
 export type ApiPet = components['schemas']['Pet'];
 export type ApiPets = components['schemas']['Pets'];
-export type ApiError = components['schemas']['Error'];
 
+export type ApiError = components['schemas']['Error'];
 export type ApiTask = components['schemas']['Task'];
 export type ApiTaskRecord = components['schemas']['TaskRecord'];
 export type ApiTaskFieldValue = components['schemas']['TaskFieldValue'];

@@ -30,7 +30,7 @@ export interface components {
       id: string;
       task_id: string;
       user_id: string;
-      completed_at?: string;
+      completed_at: string;
       field_values?: components["schemas"]["TaskFieldValue"][];
     };
     TaskField: {

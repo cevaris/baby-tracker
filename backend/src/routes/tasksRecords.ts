@@ -1,5 +1,5 @@
 import express from 'express';
-import { ApiTaskRecord } from '../types/api';
+import { ApiError, ApiTaskRecord } from '../types/api';
 
 const router = express.Router();
 
@@ -15,8 +15,40 @@ const tasksRecords: ApiTaskRecord[] = [
     { id: '80', task_id: '4', user_id: '1eb47181-d029-45ff-8a50-9deff70bb077', field_values: [], completed_at: new Date().toISOString() },
 ];
 
-router.get('/taskrecords.json', (req: express.Request, res: express.Response<ApiTaskRecord[]>) => {
-    res.json(tasksRecords);
+function sameDay(left: Date, right: Date): boolean {
+    return left.getFullYear() === right.getFullYear() &&
+        left.getMonth() === right.getMonth() &&
+        left.getDate() === right.getDate();
+}
+
+function isValidDate(d: Date) {
+    return d instanceof Date && !isNaN(d.getTime());
+}
+
+// date param requires local year, month, day, timzone; date=2021-06-16:00:00:000-600
+// http://localhost:3000/taskrecords.json?task_id=2&date=2021-06-16:00:00:000-600
+// see https://stackoverflow.com/q/17415579/3538289
+router.get('/taskrecords.json', (req: express.Request, res: express.Response<ApiError | ApiTaskRecord[]>) => {
+    if (!req.query.task_id) {
+        return res.status(400).json({ code: 400, message: `'task_id' param required.` });
+    }
+
+    const dateStr = req.query.date?.toString();
+    if (!dateStr) {
+        return res.status(400).json({ code: 400, message: `'date' param required.` });
+    }
+    const date = new Date(dateStr);
+    if (!isValidDate(date)) {
+        return res.status(400).json({ code: 400, message: `'date' param value '${dateStr}' is invalid.` });
+    }
+
+    const filtered = tasksRecords.filter(x =>
+        x.task_id === req.query.task_id &&
+        sameDay(new Date(x.completed_at), date)
+    );
+
+    console.log(req.query.task_id, date, filtered);
+    return res.json(filtered);
 });
 
 module.exports = router;

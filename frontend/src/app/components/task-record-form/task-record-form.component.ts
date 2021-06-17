@@ -26,6 +26,8 @@ export class TaskRecordFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('task record form', this.task)
+
     const controls = {};
     this.task.fields.map(taskField => {
       const validators = [];

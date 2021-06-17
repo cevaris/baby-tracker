@@ -1,5 +1,5 @@
 import express from 'express';
-import { ApiTask } from '../types/api';
+import { ApiError, ApiTask } from '../types/api';
 
 const router = express.Router();
 
@@ -13,6 +13,16 @@ const tasks: ApiTask[] = [
 
 router.get('/tasks.json', (req: express.Request, res: express.Response<ApiTask[]>) => {
     res.json(tasks);
+});
+
+router.get('/tasks/:id.json', (req: express.Request, res: express.Response<ApiTask | ApiError>) => {
+    const task = tasks.find(x => x.id === req.params.id);
+
+    if (task) {
+        res.json(task);
+    } else {
+        res.status(404).json({ code: 404, message: `Task '${req.params.id} not found.'` })
+    }
 });
 
 module.exports = router;

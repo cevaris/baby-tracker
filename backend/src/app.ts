@@ -13,7 +13,9 @@ const corsOptions: cors.CorsOptions = {
         'http://localhost:4000',                // e2e
         'http://localhost:4200',                // development
         'https://web.postman.co',               // postman
-        'https://project-id-shortlink.web.app', // production frontend web app
+
+        // production frontend web app
+        'https://acardenas-baby-tracker.wm.r.appspot.com',
     ],
     optionsSuccessStatus: 200,
 };
