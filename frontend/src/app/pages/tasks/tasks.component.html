@@ -14,11 +14,12 @@
         <mat-list role="list">
             <mat-list-item role="listitem" *ngFor="let task of activeTasks"
                 [routerLink]="['/tasks/', task.id]"
-                [queryParams]="{date: currDay | date: 'yyyy-MM-dd'}">
-
+                [queryParams]="{date: currDay | date: 'yyyy-MM-dd'}"
+                class="clickable">
                 <div mat-line><b>{{task.title}}</b></div>
                 <div mat-line>{{task.description}}</div>
 
+                <mat-divider></mat-divider>
             </mat-list-item>
         </mat-list>
     </div>
