@@ -26,7 +26,7 @@ export interface components {
       name?: string;
       value?: string;
     };
-    TaskRecord: {
+    TaskLog: {
       id: string;
       task_id: string;
       user_id: string;

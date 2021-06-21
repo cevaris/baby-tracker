@@ -6,8 +6,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TaskRecordDeleteDialogComponent } from './components/task-record-delete-dialog/task-record-delete-dialog.component';
-import { TaskRecordFormComponent } from './components/task-record-form/task-record-form.component';
+import { TaskLogDeleteDialogComponent } from './components/task-log-delete-dialog/task-log-delete-dialog.component';
+import { TaskLogFormComponent } from './components/task-log-form/task-log-form.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MaterialModule } from './material/material.module';
 import { TasksViewComponent } from './pages/tasks-view/tasks-view.component';
@@ -19,8 +19,8 @@ import { TasksComponent } from './pages/tasks/tasks.component';
     ToolbarComponent,
     TasksComponent,
     TasksViewComponent,
-    TaskRecordFormComponent,
-    TaskRecordDeleteDialogComponent,
+    TaskLogFormComponent,
+    TaskLogDeleteDialogComponent,
   ],
   imports: [
     AppRoutingModule,

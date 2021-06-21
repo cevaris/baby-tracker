@@ -110,7 +110,7 @@ components:
         value:
           type: string
 
-    TaskRecord:
+    TaskLog:
       type: object
       required:
         - id

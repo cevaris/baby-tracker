@@ -30,4 +30,4 @@ app.get('/favicon.ico', (req, res) => res.sendStatus(204));
 // import custom routes
 app.use(require('./routes'));
 app.use(require('./routes/tasks'));
-app.use(require('./routes/tasksRecords'));
+app.use(require('./routes/taskLogs'));

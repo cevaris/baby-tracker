@@ -5,9 +5,9 @@
             <h1>{{task.title}}</h1>
         </div>
         <div>{{task.description}}</div>
-        <app-task-record-form [task]="task"
+        <app-task-log-form [task]="task"
             (taskRecordEmitter)="newTaskRecordCreated($event)">
-        </app-task-record-form>
+        </app-task-log-form>
 
         <mat-list role="list">
             <mat-list-item role="listitem"

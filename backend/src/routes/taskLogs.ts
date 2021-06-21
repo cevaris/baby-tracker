@@ -1,9 +1,9 @@
 import express from 'express';
-import { ApiError, ApiTaskRecord } from '../types/api';
+import { ApiError, ApiTaskLog } from '../types/api';
 
 const router = express.Router();
 
-const tasksRecords: ApiTaskRecord[] = [
+const tasksRecords: ApiTaskLog[] = [
     { id: '10', task_id: '1', user_id: '1eb47181-d029-45ff-8a50-9deff70bb077', field_values: [], completed_at: new Date().toISOString() },
     { id: '20', task_id: '2', user_id: '1eb47181-d029-45ff-8a50-9deff70bb077', field_values: [{ name: 'ml', value: '70' }], completed_at: new Date().toISOString() },
     { id: '30', task_id: '2', user_id: '3870cba4-c6ae-46ff-ae24-b744eb283f8c', field_values: [{ name: 'ml', value: '75' }], completed_at: new Date('2021-05-05').toISOString() },
@@ -26,9 +26,9 @@ function isValidDate(d: Date) {
 }
 
 // date param requires local year, month, day, timzone; date=2021-06-16:00:00:000-600
-// http://localhost:3000/taskrecords.json?task_id=2&date=2021-06-16:00:00:000-600
+// http://localhost:3000/tasklogs.json?task_id=2&date=2021-06-16:00:00:000-600
 // see https://stackoverflow.com/q/17415579/3538289
-router.get('/taskrecords.json', (req: express.Request, res: express.Response<ApiError | ApiTaskRecord[]>) => {
+router.get('/tasklogs.json', (req: express.Request, res: express.Response<ApiError | ApiTaskLog[]>) => {
     if (!req.query.task_id) {
         return res.status(400).json({ code: 400, message: `'task_id' param required.` });
     }

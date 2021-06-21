@@ -2,18 +2,18 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { TasksService } from 'src/app/services/tasks.service';
-import { ApiTask, ApiTaskRecord } from 'src/app/types/api';
+import { ApiTask, ApiTaskLog } from 'src/app/types/api';
 import { numberValidator } from 'src/app/validators/number.validator';
 
 @Component({
-  selector: 'app-task-record-form',
-  templateUrl: './task-record-form.component.html',
-  styleUrls: ['./task-record-form.component.scss']
+  selector: 'app-task-log-form',
+  templateUrl: './task-log-form.component.html',
+  styleUrls: ['./task-log-form.component.scss']
 })
-export class TaskRecordFormComponent implements OnInit {
+export class TaskLogFormComponent implements OnInit {
 
   @Input() task: ApiTask;
-  @Output() taskRecordEmitter: EventEmitter<ApiTaskRecord> = new EventEmitter();
+  @Output() taskRecordEmitter: EventEmitter<ApiTaskLog> = new EventEmitter();
 
   taskRecordForm: FormGroup;
 
@@ -26,7 +26,7 @@ export class TaskRecordFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('task record form', this.task)
+    console.log('task log form', this.task)
 
     const controls = {};
     this.task.fields.map(taskField => {

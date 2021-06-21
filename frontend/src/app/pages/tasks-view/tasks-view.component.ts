@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { forkJoin, Subscription } from 'rxjs';
 import { filter, mergeMap } from 'rxjs/operators';
-import { TaskRecordDeleteDialogComponent } from 'src/app/components/task-record-delete-dialog/task-record-delete-dialog.component';
+import { TaskLogDeleteDialogComponent } from 'src/app/components/task-log-delete-dialog/task-log-delete-dialog.component';
 import { TasksService } from 'src/app/services/tasks.service';
-import { ApiTask, ApiTaskRecord, UUID } from 'src/app/types/api';
+import { ApiTask, ApiTaskLog, UUID } from 'src/app/types/api';
 
 @Component({
   selector: 'app-tasks-view',
@@ -19,7 +19,7 @@ export class TasksViewComponent implements OnInit {
   taskId: UUID;
 
   task: ApiTask;
-  taskRecords: ApiTaskRecord[];
+  taskRecords: ApiTaskLog[];
 
   constructor(private route: ActivatedRoute, private taskService: TasksService, private dialog: MatDialog) {
 
@@ -47,18 +47,18 @@ export class TasksViewComponent implements OnInit {
     ];
 
     forkJoin(observables)
-      .subscribe(([taskRecords, task]: [ApiTaskRecord[], ApiTask]) => {
+      .subscribe(([taskRecords, task]: [ApiTaskLog[], ApiTask]) => {
         console.log('task', task)
         console.log('taskRecords', taskRecords)
         this.taskRecords = taskRecords;
         this.task = task;
       }, error => {
-        console.log('failed fetching task/taskrecords', error);
+        console.log('failed fetching task/tasklogs', error);
       });
   }
 
-  newTaskRecordCreated(taskRecord: ApiTaskRecord) {
-    console.log('new task record', taskRecord);
+  newTaskRecordCreated(taskRecord: ApiTaskLog) {
+    console.log('new task log', taskRecord);
     this.reloadTasksRecords();
   }
 
@@ -70,7 +70,7 @@ export class TasksViewComponent implements OnInit {
   }
 
   deleteTaskRecord(taskRecordId: UUID) {
-    const dialogRef = this.dialog.open(TaskRecordDeleteDialogComponent);
+    const dialogRef = this.dialog.open(TaskLogDeleteDialogComponent);
 
     dialogRef.afterClosed()
       .pipe(

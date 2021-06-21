@@ -6,6 +6,6 @@ export type ApiPets = components['schemas']['Pets'];
 
 export type ApiError = components['schemas']['Error'];
 export type ApiTask = components['schemas']['Task'];
-export type ApiTaskRecord = components['schemas']['TaskRecord'];
+export type ApiTaskLog = components['schemas']['TaskLog'];
 export type ApiTaskFieldValue = components['schemas']['TaskFieldValue'];
 export type ApiTaskField = components['schemas']['TaskField'];
