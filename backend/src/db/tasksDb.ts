@@ -1,17 +1,50 @@
-import { ApiPet } from '../types/api';
+import { firestore } from "firebase-admin";
 
-export class TasksDb {
+export type TaskFieldRecord = {
+    name: string
+    description: string
+    type: string
+    isRequired: boolean
+}
+
+export type TaskRecord = {
+    title: string
+    description: string
+    id: string
+    fields: Array<TaskFieldRecord>
+    disabledAt?: firestore.Timestamp
+}
+
+interface TaskLogRecord {
+}
+
+export class TasksDbFirestore {
     private db: FirebaseFirestore.Firestore;
     constructor(db: FirebaseFirestore.Firestore) {
         this.db = db;
     }
 
-    async get() {
-        const pet: ApiPet = {
-            id: 1, name: 'billy', birthday: new Date().toISOString()
-        };
-
+    async getTasks(): Promise<Array<TaskRecord>> {
         const tasks = await this.db.collection('tasks').get();
-        return tasks.docs.map(v => v.data())
+        return tasks.docs.map(v => {
+            const record = v.data() as TaskRecord;
+
+            if (record) {
+                return record;
+            } else {
+                throw Error('no Tasks found')
+            }
+        });
+    }
+
+    async getTask(id: string): Promise<TaskRecord> {
+        const task = await this.db.collection('tasks').doc(id).get();
+        const record = task.data() as TaskRecord;
+
+        if (record) {
+            return record;
+        } else {
+            throw Error('no Tasks found')
+        }
     }
 }

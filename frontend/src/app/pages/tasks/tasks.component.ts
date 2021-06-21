@@ -10,17 +10,17 @@ import { ApiTask } from 'src/app/types/api';
 })
 export class TasksComponent implements OnInit {
   activeTasks: ApiTask[];
-  today: Date;
+  currDay: Date;
 
   constructor(private taskService: TasksService) { }
 
   ngOnInit(): void {
-    this.today = new Date();
+    this.currDay = new Date();
     this.updateTasks();
   }
 
   onDateChange(date: Date) {
-    this.today = date;
+    this.currDay = date;
     this.updateTasks();
   }
 
@@ -28,7 +28,7 @@ export class TasksComponent implements OnInit {
     this.taskService.getTasks()
       .pipe(
         // if not disabled, only render active tasks
-        map(tasks => tasks.filter(t => !t.disabled_at || new Date(t.disabled_at).getTime() >= this.today.getTime()))
+        map(tasks => tasks.filter(t => !t.disabled_at || new Date(t.disabled_at).getTime() >= this.currDay.getTime()))
       )
       .subscribe((tasks) => this.activeTasks = tasks);
   }

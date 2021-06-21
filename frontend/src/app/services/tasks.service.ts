@@ -37,7 +37,7 @@ export class TasksService {
 
   // TODO update writes
   newTaskRecord(task_id: string, now: Date, fieldValues: Array<ApiTaskFieldValue>): Observable<ApiTaskRecord> {
-    const record = { id: uuidv4(), task_id: task_id, field_values: fieldValues, completed_at: now.toISOString() };
+    const record = { id: uuidv4(), task_id: task_id, user_id: 'user_id', field_values: fieldValues, completed_at: now.toISOString() };
     // tasksRecords.push(record);
     return of(record);
   }

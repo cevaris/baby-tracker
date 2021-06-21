@@ -1,4 +1,6 @@
 import express from 'express';
+import { TasksDb } from '../db';
+import { presentTask } from '../presenters/task';
 import { ApiError, ApiTask } from '../types/api';
 
 const router = express.Router();
@@ -11,15 +13,17 @@ const tasks: ApiTask[] = [
     { title: 'Non Required field', description: 'This field task value is not required.', id: '5', fields: [{ name: 'task_field1', description: 'optional field?', type: 'input', is_required: false }] },
 ];
 
-router.get('/tasks.json', (req: express.Request, res: express.Response<ApiTask[]>) => {
-    res.json(tasks);
+router.get('/tasks.json', async (req: express.Request, res: express.Response<ApiTask[]>) => {
+    const tasks = await TasksDb.getTasks();
+    res.json(tasks.map(presentTask));
 });
 
-router.get('/tasks/:id.json', (req: express.Request, res: express.Response<ApiTask | ApiError>) => {
-    const task = tasks.find(x => x.id === req.params.id);
+router.get('/tasks/:id.json', async (req: express.Request, res: express.Response<ApiTask | ApiError>) => {
+    // const task = tasks.find(x => x.id === req.params.id);
+    const task = await TasksDb.getTask(req.params.id);
 
     if (task) {
-        res.json(task);
+        res.json(presentTask(task));
     } else {
         res.status(404).json({ code: 404, message: `Task '${req.params.id} not found.'` })
     }
