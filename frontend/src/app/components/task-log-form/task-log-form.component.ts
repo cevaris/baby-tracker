@@ -44,12 +44,17 @@ export class TaskLogFormComponent implements OnInit {
 
   onSubmit(): void {
     this.submitting = true;
+
+    const fieldValues = [];
+    for (let [key, value] of Object.entries(this.taskRecordForm.value)) {
+      fieldValues.push({ name: key, value: value });
+    }
     const apiTaskLog: ApiTaskLog = {
       id: uuidv4(),
       user_id: 'TODO',
       task_id: this.task.id,
       completed_at: new Date().toISOString(),
-      field_values: this.taskRecordForm.value,
+      field_values: fieldValues,
     }
     this.tasksService.saveTaskRecord(apiTaskLog)
       .pipe(finalize(() => this.submitting = false))

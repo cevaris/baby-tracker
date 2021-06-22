@@ -7,8 +7,7 @@ export function presentTask(task: TaskRecord): ApiTask {
         description: task.description,
         title: task.title,
         disabled_at: task.disabledAt?.toDate().toISOString(),
-        // fallback to [] if fields field is undefined.
-        fields: (task.fields || []).map(f => {
+        fields: task.fields.map(f => {
             return {
                 name: f.name,
                 description: f.description,

@@ -1,4 +1,5 @@
 import { firestore } from "firebase-admin";
+import { ApiTaskLog } from "../types/api";
 
 export type TaskFieldRecord = {
     name: string
@@ -25,7 +26,7 @@ export interface TaskLogRecord {
     taskId: string
     userId: string // TODO
     completedAt: firestore.Timestamp
-    fieldValues: Array<TaskFieldValue>
+    fieldValues?: Array<TaskFieldValue>
 }
 
 export class TasksDbFirestore {
@@ -81,14 +82,24 @@ export class TasksDbFirestore {
         return response;
     }
 
-    async saveTaskLog(taskLog: TaskLogRecord): Promise<void> {
+    async saveTaskLog(apiTaskLog: ApiTaskLog): Promise<void> {
         const doc = this.db.collection('taskLogs')
-            .doc(taskLog.id)
+            .doc(apiTaskLog.id)
 
         try {
+            const taskLog: TaskLogRecord = {
+                id: apiTaskLog.id,
+                userId: apiTaskLog.user_id,
+                taskId: apiTaskLog.task_id,
+                completedAt: firestore.Timestamp.fromDate(new Date(apiTaskLog.completed_at)),
+                fieldValues: apiTaskLog.field_values?.map(f => {
+                    return { name: f.name, value: f.value }
+                })
+            }
+
             await doc.set(taskLog);
         } catch (error) {
-            throw Error(`failed to save ${taskLog}: ${error}`);
+            throw Error(`failed to save ${apiTaskLog}: ${error}`);
         }
     }
 }

@@ -6,8 +6,9 @@ export function presentTaskLog(log: TaskLogRecord): ApiTaskLog {
         id: log.id,
         completed_at: log.completedAt?.toDate().toISOString(),
         task_id: log.taskId,
-        user_id: 'TODO',
-        field_values: log.fieldValues.map(fv => {
+        user_id: log.userId,
+        // fallback to [] if fields field is undefined.
+        field_values: (log.fieldValues || []).map(fv => {
             return {
                 name: fv.name,
                 value: fv.value

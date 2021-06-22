@@ -7,8 +7,8 @@ import { ApiTask, ApiTaskLog, UUID } from '../types/api';
 const URL_TASKS = `${environment.apiDomain}/tasks.json`;
 const URL_TASK = (id: UUID) => `${environment.apiDomain}/tasks/${id}.json`;
 const URL_TASKLOGS = (task_id: UUID, date: Date) =>
-  `${environment.apiDomain}/tasklogs.json?task_id=${task_id}&date=${date.toISOString()}`;
-const URL_TASKLOG = `${environment.apiDomain}/tasklogs.json`;
+  `${environment.apiDomain}/taskLogs.json?task_id=${task_id}&date=${date.toISOString()}`;
+const URL_TASKLOG = `${environment.apiDomain}/taskLogs.json`;
 
 @Injectable({
   providedIn: 'root'

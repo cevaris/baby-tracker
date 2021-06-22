@@ -22,9 +22,15 @@ export interface components {
       disabled_at?: string;
       fields: components["schemas"]["TaskField"][];
     };
+    TaskField: {
+      name: string;
+      description?: string;
+      is_required: boolean;
+      type: "checkbox" | "input" | "number" | "textarea";
+    };
     TaskFieldValue: {
-      name?: string;
-      value?: string;
+      name: string;
+      value: string;
     };
     TaskLog: {
       id: string;
@@ -32,12 +38,6 @@ export interface components {
       user_id: string;
       completed_at: string;
       field_values?: components["schemas"]["TaskFieldValue"][];
-    };
-    TaskField: {
-      name: string;
-      description?: string;
-      is_required: boolean;
-      type: "checkbox" | "input" | "number" | "textarea";
     };
     User: {
       id?: string;
@@ -120,4 +120,4 @@ export interface operations {
   };
 }
 
-export interface external { }
+export interface external {}
