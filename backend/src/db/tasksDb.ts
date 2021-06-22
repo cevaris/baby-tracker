@@ -60,14 +60,14 @@ export class TasksDbFirestore {
 
     async getTaskLogs(taskId: string, day: Date): Promise<Array<TaskLogRecord>> {
         const nextDay = new Date(new Date(day).getTime() + 60 * 60 * 24 * 1000);
-        console.log(taskId, day, nextDay);
+        // console.log(taskId, day, nextDay);
 
-        const scan = await this.db.collection('taskLogs').get();
-        console.log('taskLog list', scan.docs.map(d => {
-            const t = d.data() as TaskLogRecord;
-            console.log(t.completedAt.toDate().toISOString());
-            return t;
-        }));
+        // const scan = await this.db.collection('taskLogs').get();
+        // console.log('taskLog list', scan.docs.map(d => {
+        //     const t = d.data() as TaskLogRecord;
+        //     console.log(t.completedAt.toDate().toISOString());
+        //     return t;
+        // }));
 
         const logs = await this.db.collection('taskLogs')
             .where('taskId', '==', taskId)
@@ -77,8 +77,18 @@ export class TasksDbFirestore {
 
         const response = logs.docs.map(d => d.data() as TaskLogRecord);
 
-        console.log('response', response);
+        // console.log('response', response);
         return response;
     }
 
+    async saveTaskLog(taskLog: TaskLogRecord): Promise<void> {
+        const doc = this.db.collection('taskLogs')
+            .doc(taskLog.id)
+
+        try {
+            await doc.set(taskLog);
+        } catch (error) {
+            throw Error(`failed to save ${taskLog}: ${error}`);
+        }
+    }
 }

@@ -25,7 +25,7 @@ export class TasksViewComponent implements OnInit {
 
     this.route.queryParamMap
       .subscribe(queryParamMap => {
-        console.log('trying to load TaskView')
+        // console.log('trying to load TaskView')
         // // construct local time UTC date based off YYYY-MM-DD string
         // const now = moment(new Date());
         // const dt = moment(queryParamMap.get('date'), 'YYYY-MM-DD');
@@ -57,17 +57,17 @@ export class TasksViewComponent implements OnInit {
 
     forkJoin(observables)
       .subscribe(([taskRecords, task]: [ApiTaskLog[], ApiTask]) => {
-        console.log('task', task)
-        console.log('taskRecords', taskRecords)
+        // console.log('task', task)
+        // console.log('taskRecords', taskRecords)
         this.taskRecords = taskRecords;
         this.task = task;
       }, error => {
-        console.log('failed fetching task/tasklogs', error);
+        console.error('failed fetching task/tasklogs', error);
       });
   }
 
   newTaskRecordCreated(taskRecord: ApiTaskLog) {
-    console.log('new task log', taskRecord);
+    // console.log('new task log', taskRecord);
     this.reloadTasksRecords();
   }
 

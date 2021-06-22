@@ -8,7 +8,7 @@ export function openapi(app: express.Express) {
     const data = YAML.load(filepath);
     if (data && typeof data === 'object') {
         app.use('/docs', swaggerUi.serve, swaggerUi.setup(data));
-        console.log('loaded /docs')
+        // console.log('loaded /docs')
     } else {
         throw new Error(`failed to load swagger-ui: filepath=${filepath} data=${data}`);
     }

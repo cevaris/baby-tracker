@@ -26,7 +26,7 @@ export class TaskLogFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('task log form', this.task)
+    // console.log('task log form', this.task)
 
     const controls = {};
     this.task.fields.map(taskField => {
