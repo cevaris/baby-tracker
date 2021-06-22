@@ -8,7 +8,7 @@
     "deploy": "echo 'y' | gcloud app deploy",
     "dev": "npm run start",
     "gcp-build": "npm run build",
-    "start": "./node_modules/.bin/nodemon --watch .. --watch ../common ./src/index.ts -e ts,json",
+    "start": "./node_modules/.bin/nodemon ./src/index.ts -e ts,json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

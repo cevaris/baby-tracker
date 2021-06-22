@@ -3,7 +3,7 @@ import { firestore } from "firebase-admin";
 export type TaskFieldRecord = {
     name: string
     description: string
-    type: string
+    type: 'checkbox' | 'input' | 'number' | 'textarea'
     isRequired: boolean
 }
 

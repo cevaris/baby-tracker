@@ -34,11 +34,10 @@ export interface components {
       field_values?: components["schemas"]["TaskFieldValue"][];
     };
     TaskField: {
-      id?: string;
-      name?: string;
+      name: string;
       description?: string;
-      is_required?: boolean;
-      type?: "checkbox" | "input" | "number" | "textarea";
+      is_required: boolean;
+      type: "checkbox" | "input" | "number" | "textarea";
     };
     User: {
       id?: string;
@@ -121,4 +120,4 @@ export interface operations {
   };
 }
 
-export interface external {}
+export interface external { }

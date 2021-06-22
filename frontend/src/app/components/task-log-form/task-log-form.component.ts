@@ -4,6 +4,7 @@ import { finalize } from 'rxjs/operators';
 import { TasksService } from 'src/app/services/tasks.service';
 import { ApiTask, ApiTaskLog } from 'src/app/types/api';
 import { numberValidator } from 'src/app/validators/number.validator';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-task-log-form',
@@ -26,8 +27,6 @@ export class TaskLogFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log('task log form', this.task)
-
     const controls = {};
     this.task.fields.map(taskField => {
       const validators = [];
@@ -45,7 +44,14 @@ export class TaskLogFormComponent implements OnInit {
 
   onSubmit(): void {
     this.submitting = true;
-    this.tasksService.newTaskRecord(this.task.id, new Date(), this.taskRecordForm.value)
+    const apiTaskLog: ApiTaskLog = {
+      id: uuidv4(),
+      user_id: 'TODO',
+      task_id: this.task.id,
+      completed_at: new Date().toISOString(),
+      field_values: this.taskRecordForm.value,
+    }
+    this.tasksService.saveTaskRecord(apiTaskLog)
       .pipe(finalize(() => this.submitting = false))
       .subscribe(taskRecord => {
         this.taskRecordForm.reset();

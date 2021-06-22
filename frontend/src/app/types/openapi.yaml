@@ -137,10 +137,11 @@ components:
 
     TaskField:
       type: object
+      required:
+        - name
+        - is_required
+        - type
       properties:
-        id:
-          type: string
-          format: UUID
         name:
           type: string
         description:

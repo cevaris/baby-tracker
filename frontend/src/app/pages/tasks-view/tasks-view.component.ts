@@ -66,8 +66,9 @@ export class TasksViewComponent implements OnInit {
       });
   }
 
-  newTaskRecordCreated(taskRecord: ApiTaskLog) {
-    // console.log('new task log', taskRecord);
+  async newTaskRecordCreated(taskRecord: ApiTaskLog) {
+    console.log('new task log', taskRecord);
+    // await this.taskService.newTaskRecord(taskRecord);
     this.reloadTasksRecords();
   }
 
