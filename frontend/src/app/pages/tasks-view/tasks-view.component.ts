@@ -26,12 +26,21 @@ export class TasksViewComponent implements OnInit {
     this.route.queryParamMap
       .subscribe(queryParamMap => {
         console.log('trying to load TaskView')
+        // // construct local time UTC date based off YYYY-MM-DD string
+        // const now = moment(new Date());
+        // const dt = moment(queryParamMap.get('date'), 'YYYY-MM-DD');
+        // dt.second(now.seconds());
+        // dt.minute(now.minutes());
+        // dt.hour(now.hours());
+        // this.date = dt.toDate();
+
+        // this.taskId = this.route.snapshot.paramMap.get('id');
+        // console.log('TasksViewComponent', dt, this.date.toISOString());
+
+
         // construct local time UTC date based off YYYY-MM-DD string
-        const now = moment(new Date());
+        // const now = moment(new Date());
         const dt = moment(queryParamMap.get('date'), 'YYYY-MM-DD');
-        dt.second(now.seconds());
-        dt.minute(now.minutes());
-        dt.hour(now.hours());
         this.date = dt.toDate();
 
         this.taskId = this.route.snapshot.paramMap.get('id');

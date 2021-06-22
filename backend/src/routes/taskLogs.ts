@@ -1,4 +1,6 @@
 import express from 'express';
+import { TasksDb } from '../db';
+import { presentTaskLog } from '../presenters/taskLogs';
 import { ApiError, ApiTaskLog } from '../types/api';
 
 const router = express.Router();
@@ -28,7 +30,7 @@ function isValidDate(d: Date) {
 // date param requires local year, month, day, timzone; date=2021-06-16:00:00:000-600
 // http://localhost:3000/tasklogs.json?task_id=2&date=2021-06-16:00:00:000-600
 // see https://stackoverflow.com/q/17415579/3538289
-router.get('/tasklogs.json', (req: express.Request, res: express.Response<ApiError | ApiTaskLog[]>) => {
+router.get('/tasklogs.json', async (req: express.Request, res: express.Response<ApiError | ApiTaskLog[]>) => {
     if (!req.query.task_id) {
         return res.status(400).json({ code: 400, message: `'task_id' param required.` });
     }
@@ -42,13 +44,22 @@ router.get('/tasklogs.json', (req: express.Request, res: express.Response<ApiErr
         return res.status(400).json({ code: 400, message: `'date' param value '${dateStr}' is invalid.` });
     }
 
-    const filtered = tasksRecords.filter(x =>
-        x.task_id === req.query.task_id &&
-        sameDay(new Date(x.completed_at), date)
-    );
+    // const filtered = tasksRecords.filter(x =>
+    //     x.task_id === req.query.task_id &&
+    //     sameDay(new Date(x.completed_at), date)
+    // );
 
-    console.log(req.query.task_id, date, filtered);
-    return res.json(filtered);
+    // console.log(req.query.task_id, date, filtered);
+    // return res.json(filtered);
+
+    try {
+        const logs = await TasksDb.getTaskLogs(req.query.task_id.toString(), date)
+        console.log(logs);
+
+        return res.json(logs.map(presentTaskLog));
+    } catch (error) {
+        res.status(500).json({ code: 500, message: `Failed to fetch taskslogs. ${error}` });
+    }
 });
 
 module.exports = router;
