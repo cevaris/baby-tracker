@@ -1,0 +1,18 @@
+<div *ngIf="user$ | async as user">
+    <button mat-button [matMenuTriggerFor]="menuUser">
+        <img class="avatar" [src]="user.photoURL" alt="user avatar" />
+        {{user.displayName}}
+    </button>
+
+    <mat-menu #menuUser>
+        <button mat-menu-item (click)="authService.signOut()">Sign out</button>
+    </mat-menu>
+</div>
+
+<div *ngIf="!(user$ |async)">
+    <!-- <button mat-stroked-button color="primary" class="button"
+        routerLink="/sign-in">Sign In</button> -->
+
+    <a mat-list-item
+        [routerLink]="'/sign-in'">Sign In</a>
+</div>

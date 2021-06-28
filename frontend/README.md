@@ -4,6 +4,7 @@ Database references
  - [Getting Started](https://firebase.google.com/docs/firestore/quickstart)
  - [Query data](https://firebase.google.com/docs/firestore/manage-data/add-data)
  - [Database](https://console.firebase.google.com/u/0/project/acardenas-baby-tracker/firestore/)
+ - [Auth](https://www.positronx.io/full-angular-7-firebase-authentication-system/)
 
 
 API

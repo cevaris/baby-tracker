@@ -7,16 +7,28 @@
 
 <mat-sidenav-container>
     <mat-sidenav #sidenav class="sidenav">
-        <div class="center">
-            <img class="avatar"
-                src="https://lh3.googleusercontent.com/ogw/ADGmqu-Hz397h7fv8iQT5c1V4JWM-31W-x04bQD6raypLQ=s64-c-mo"
-                alt="user avatar" />
+        <div *ngIf="user$ | async as user">
+            <button mat-button disabled>
+                <img class="avatar" [src]="user.photoURL" alt="user avatar" />
+                {{user.displayName}}
+            </button>
         </div>
+
+
         <mat-nav-list>
-            <a mat-list-item (click)="sidenav.toggle()"
-                [routerLink]="'/tasks'">Tasks</a>
-            <a mat-list-item (click)="sidenav.toggle()"
-                [routerLink]="'/calendar'">Calendar</a>
+            <div *ngIf="!(user$ | async)">
+                <a mat-list-item (click)="sidenav.toggle()"
+                    [routerLink]="'/sign-in'">Sign in</a>
+            </div>
+
+            <div *ngIf="user$ | async as user">
+                <a mat-list-item (click)="logout()"
+                    [routerLink]="'/sign-out'">Sign out</a>
+                <a mat-list-item (click)="sidenav.toggle()"
+                    [routerLink]="'/tasks'">Tasks</a>
+                <a mat-list-item (click)="sidenav.toggle()"
+                    [routerLink]="'/calendar'">Calendar</a>
+            </div>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
