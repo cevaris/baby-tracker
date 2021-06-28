@@ -1,40 +1,57 @@
-<div class="displayTable">
-    <div class="displayTableCell">
+<div fxLayout="column" fxLayoutAlign="center center">
+    <div fxFlex="50"></div>
+    <div fxFlex="20">
+        <h3>Sign in</h3>
 
-        <div class="authBlock">
-            <h3>Signin</h3>
-            <div class="formGroup">
-                <input type="text" class="form-control" placeholder="Username"
-                    #userName required>
-            </div>
+        <form [formGroup]="form">
+            <mat-form-field appearance="standard" class="fill">
+                <mat-label>Username</mat-label>
+                <input matInput #userName class="form-control"
+                    formControlName="userName">
+            </mat-form-field>
+            <mat-error
+                *ngIf="form.controls['userName'].hasError('required') && form.get('userName').touched ">
+                Value is required.
+            </mat-error>
+            <mat-error *ngIf="form.controls['userName'].hasError('email')">
+                Must be a valid email.
+            </mat-error>
 
-            <div class="formGroup">
-                <input type="password" class="form-control"
-                    placeholder="Password" #userPassword required>
-            </div>
+            <mat-form-field appearance="standard" class="fill">
+                <mat-label>Password</mat-label>
+                <input matInput #userPassword class="form-control"
+                    formControlName="userPassword" type="password">
+            </mat-form-field>
+            <mat-error
+                *ngIf="form.controls['userPassword'].hasError('required') && form.get('userPassword').touched ">
+                Value is required.
+            </mat-error>
 
-            <div class="formGroup">
-                <input type="button" class="btn btn-primary btn-block"
-                    value="Sign in"
-                    (click)="authService.signIn(userName.value, userPassword.value)">
-            </div>
+            <button mat-stroked-button (click)="onSubmit()" class="form-button"
+                color="primary" [disabled]="!form.valid || submitting">
+                Sign in
+            </button>
+        </form>
 
-            <div class="formGroup">
-                <button type="button" class="btn btn-danger btn-block"
-                    (click)="authService.googleAuth()">
-                    Log in with Google
-                </button>
-            </div>
+        <br />
+        <mat-divider></mat-divider>
+        <br />
 
-            <div class="forgotPassword">
-                <span routerLink="/forgot-password">Forgot Password?</span>
-            </div>
-        </div>
-
-        <div class="redirectToLogin">
-            <span>Not registered yet?<span class="redirect"
-                    routerLink="/sign-up"> Register</span></span>
+        <div>
+            <button mat-stroked-button (click)="googleAuth()"
+                class="form-button" color="accent">
+                Sign in with Google
+            </button>
+            <button mat-stroked-button routerLink="/forgot-password"
+                class="form-button">
+                Forgot Password
+            </button>
+            <button mat-stroked-button routerLink="/sign-up"
+                class="form-button">
+                Sign up
+            </button>
         </div>
 
     </div>
+    <div fxFlex="50"></div>
 </div>

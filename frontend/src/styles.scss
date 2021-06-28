@@ -19,3 +19,10 @@ body {
     display: flex;
     justify-content: center;
 }
+
+// allows for forms to not be jitter
+// when <mat-error> is rendered.
+// https://stackoverflow.com/a/53048376/3538289
+.mat-form-field-infix {
+    width: auto !important;
+}
